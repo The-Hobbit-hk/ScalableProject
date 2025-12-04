@@ -1,0 +1,55 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Next / React builds
+.next/
+out/
+dist/
+build/
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+.local
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs & coverage
+logs/
+*.log
+coverage/
+
+# Typescript
+*.tsbuildinfo
+
+# Generated/static images/emulator/system files (important for your case)
+*.img
+*.qcow2
+*.vdi
+*.vmdk
+*.iso
+*.cache
+*.key
+*.pem
+*.crt
+*.ini
+*.log
+*.trace
+
+# Android / Emulator data
+.android/
+.avd/
+*.avd
+*.android
+*.lock
+
+# Gemini / dotfiles that may contain big files
+.gemini/
+.idea/
