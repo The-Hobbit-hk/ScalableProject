@@ -1,6 +1,12 @@
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
+// Email validation helper
+const isValidEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+};
+
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
@@ -14,6 +20,11 @@ const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     try {
+        // Validate email format
+        if (!isValidEmail(email)) {
+            return res.status(400).json({ message: 'Please enter a valid email address' });
+        }
+
         const userExists = await User.findOne({ email });
 
         if (userExists) {
@@ -89,6 +100,11 @@ const updateUserProfile = async (req, res) => {
     const user = await User.findById(req.user._id);
 
     if (user) {
+        // Validate email format if email is being updated
+        if (req.body.email && !isValidEmail(req.body.email)) {
+            return res.status(400).json({ message: 'Please enter a valid email address' });
+        }
+
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
 
